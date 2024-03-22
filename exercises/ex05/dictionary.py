@@ -1,10 +1,10 @@
-"""DIctionary Practice with different variables."""
+"""Dictionary Practice with different variables."""
 __author__ = "730410860"
 
 
 def invert(dict_input: dict[str, str]) -> dict[str, str]:
     """Keys of input list become value of output list."""
-    invert_variable: list[str] = { }
+    invert_variable: list[str] = { } 
     for keys, value in dict_input.items():
         if value in invert_variable:
             raise KeyError("Theres is a duplicate value.")
@@ -14,14 +14,19 @@ def invert(dict_input: dict[str, str]) -> dict[str, str]:
 
 def favorite_color(dict_input: dict[str, str]) -> str:
     """Returning a list of the most popular colors."""
-    color_variable: list[str] = { }
-    for colors in dict_input:
-       color_variable[colors] = color_variable + 1
+    color_variable: dict[str, int] = {}
+    
+    # Count occurrences of each color
+    for color in dict_input.values():
+        if color in color_variable:
+            color_variable[color] += 1
+        else:
+            color_variable[color] = 1
     popular_color = None
-    big_count: int = 0
-    for colors, count in color_variable:
-        if count > big_count or (count == big_count and colors < popular_color):
-            popular_color = colors
+    big_count = None
+    for color, count in color_variable.items():
+        if big_count is None or count > big_count or (count == big_count and color < popular_color):
+            popular_color = color
             big_count = count
     return popular_color
 
